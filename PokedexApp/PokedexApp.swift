@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct PokedexApp: App {
     
-    @StateObject var favoriteVM = FavoriteVM()
+    var favoriteVM = FavoriteVM(pokedexVM: PokedexVM())
     
     var body: some Scene {
         WindowGroup {

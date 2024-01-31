@@ -11,7 +11,6 @@ struct PokedexView: View {
     
     @ObservedObject private var pokedexVM = PokedexVM()
     @EnvironmentObject var favoriteVM: FavoriteVM
-    @State private var likeStates = [Int: Bool]()
     
     var body: some View {
         VStack {
@@ -23,7 +22,8 @@ struct PokedexView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: FavoriteListView(favoriteVM: favoriteVM)) {
+                NavigationLink(destination: FavoriteListView(favoriteVM: _favoriteVM)
+                    .environmentObject(favoriteVM)) {
                     Text("Show Favorites")
                 }
             }
@@ -32,7 +32,7 @@ struct PokedexView: View {
 
             List {
                 ForEach(pokedexVM.pokemonNameAndDetails, id: \.details.id) { pokemon in
-                    PokemonRow(pokemonNameAndDetails: pokemon)
+                    PokemonRow(pokemonNameAndDetails: pokemon, rowState: .pokedex)
                 }
             }
             .padding(.top, 30)

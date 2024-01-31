@@ -9,15 +9,22 @@ import SwiftUI
 
 struct PokemonRow: View {
     
+    enum RowState {
+        case pokedex
+        case favorite
+    }
+    
     var pokemonNameAndDetails: PokemonFullDetails
+    var rowState: RowState
     
     @ObservedObject private var fetchImageUrl: FetchImageUrl
     @State private var isLikeTapped: Bool
     @EnvironmentObject var favoriteVM: FavoriteVM
     
-    init(pokemonNameAndDetails: PokemonFullDetails) {
+    init(pokemonNameAndDetails: PokemonFullDetails, rowState: RowState) {
         self.pokemonNameAndDetails = pokemonNameAndDetails
         self.isLikeTapped = pokemonNameAndDetails.isFav
+        self.rowState = rowState
         fetchImageUrl = FetchImageUrl(imageUrl: pokemonNameAndDetails.details.sprites?.frontDefault ?? "")
     }
     
@@ -64,10 +71,15 @@ struct PokemonRow: View {
             
             Button(action: {
                 isLikeTapped.toggle()
-                if isLikeTapped {
-                    favoriteVM.addFavorite(pokemonNameAndDetails)
-                } else {
-                    favoriteVM.removeFavorite(pokemonNameAndDetails)
+                switch rowState {
+                case .pokedex:
+                    if isLikeTapped {
+                        favoriteVM.addFavorite(pokemonNameAndDetails)
+                    } else {
+                        favoriteVM.removeFavorite(pokemonNameAndDetails)
+                    }
+                case .favorite:
+                    favoriteVM.updateIsFav(for: pokemonNameAndDetails.details.id ?? 1, isFav: false)
                 }
             }) {
                 if isLikeTapped {
@@ -105,6 +117,6 @@ struct PokemonRow: View {
 struct PokemonRow_Previews: PreviewProvider {
     static var previews: some View {
         PokemonRow(pokemonNameAndDetails:
-                    PokemonFullDetails(nameAndUrl: NameAndUrlData(name: "guy", url: "twig"), details: PokemonData(id: 1, moves: [PokemonMovesData(move: NameAndUrlData(name: "guy", url: "twig"))], stats: [PokemonStatsData(stat: NameAndUrlData(name: "guy", url: "twig"))], sprites: SpritesData(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")), isFav: true))
+                    PokemonFullDetails(nameAndUrl: NameAndUrlData(name: "guy", url: "twig"), details: PokemonData(id: 1, moves: [PokemonMovesData(move: NameAndUrlData(name: "guy", url: "twig"))], abilities: [PokemonAbilitiesData(ability: NameAndUrlData(name: "guy", url: "twig"))], stats: [PokemonStatsData(stat: NameAndUrlData(name: "guy", url: "twig"))], sprites: SpritesData(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")), isFav: true), rowState: .favorite)
     }
 }
