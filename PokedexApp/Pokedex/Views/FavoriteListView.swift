@@ -9,15 +9,16 @@ import SwiftUI
 
 struct FavoriteListView: View {
     
-    @EnvironmentObject var favoriteVM: FavoriteVM
+    @ObservedObject private var favoriteVM = FavoriteVM()
 
     var body: some View {
         Text("My Favorite Pokemons List")
             .font(.system(size: 35))
             .multilineTextAlignment(.center)
+        
         List {
             ForEach(favoriteVM.favorites, id: \.details.id) { pokemon in
-                PokemonFavRow(pokemonFullDetails: pokemon)
+                PokemonRow(pokemonFullDetails: pokemon)
             }
         }
     }
