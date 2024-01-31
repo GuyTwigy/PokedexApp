@@ -9,12 +9,7 @@ import Foundation
 
 class FavoriteVM: ObservableObject {
     
-    var pokedexVM: PokedexVM
     @Published var favorites: [PokemonFullDetails] = []
-    
-    init(pokedexVM: PokedexVM) {
-        self.pokedexVM = pokedexVM
-    }
     
     func addFavorite(_ pokemon: PokemonFullDetails) {
         if !favorites.contains(where: { $0.details.id == pokemon.details.id }) {

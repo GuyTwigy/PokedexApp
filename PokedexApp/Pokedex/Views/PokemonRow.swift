@@ -14,29 +14,26 @@ struct PokemonRow: View {
         case favorite
     }
     
-    var pokemonNameAndDetails: PokemonFullDetails
-    var rowState: RowState
+    var pokemonFullDetails: PokemonFullDetails
     
     @ObservedObject private var fetchImageUrl: FetchImageUrl
     @State private var isLikeTapped: Bool
     @EnvironmentObject var favoriteVM: FavoriteVM
     
-    init(pokemonNameAndDetails: PokemonFullDetails, rowState: RowState) {
-        self.pokemonNameAndDetails = pokemonNameAndDetails
-        self.isLikeTapped = pokemonNameAndDetails.isFav
-        self.rowState = rowState
-        fetchImageUrl = FetchImageUrl(imageUrl: pokemonNameAndDetails.details.sprites?.frontDefault ?? "")
+    init(pokemonFullDetails: PokemonFullDetails) {
+        self.pokemonFullDetails = pokemonFullDetails
+        self.isLikeTapped = pokemonFullDetails.isFav
+        fetchImageUrl = FetchImageUrl(imageUrl: pokemonFullDetails.details.sprites?.frontDefault ?? "")
     }
     
     var body: some View {
         HStack {
-            
             if fetchImageUrl.isLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
             } else {
-                AsyncImage(url: URL(string: pokemonNameAndDetails.details.sprites?.frontDefault ?? "")) { phase in
+                AsyncImage(url: URL(string: pokemonFullDetails.details.sprites?.frontDefault ?? "")) { phase in
                     switch phase {
                     case .empty:
                         ProgressView()
@@ -61,7 +58,7 @@ struct PokemonRow: View {
             
             Spacer()
             
-            Text(pokemonNameAndDetails.nameAndUrl.name ?? "")
+            Text(pokemonFullDetails.nameAndUrl.name ?? "")
                 .font(.system(size: 20))
                 .bold()
                 .padding(.trailing, 20.0)
@@ -71,7 +68,7 @@ struct PokemonRow: View {
             
             Button(action: {
                 isLikeTapped.toggle()
-                favoriteVM.toggleFavorite(pokemon: pokemonNameAndDetails, isFavorite: isLikeTapped)
+                favoriteVM.toggleFavorite(pokemon: pokemonFullDetails, isFavorite: isLikeTapped)
             }) {
                 if isLikeTapped {
                     Image(systemName: "heart.fill")
@@ -101,13 +98,13 @@ struct PokemonRow: View {
     }
     
     mutating func changeIsFavValue() {
-        pokemonNameAndDetails.isFav = true
+        pokemonFullDetails.isFav = true
     }
 }
 
 struct PokemonRow_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonRow(pokemonNameAndDetails:
-                    PokemonFullDetails(nameAndUrl: NameAndUrlData(name: "guy", url: "twig"), details: PokemonData(id: 1, moves: [PokemonMovesData(move: NameAndUrlData(name: "guy", url: "twig"))], abilities: [PokemonAbilitiesData(ability: NameAndUrlData(name: "guy", url: "twig"))], stats: [PokemonStatsData(stat: NameAndUrlData(name: "guy", url: "twig"))], sprites: SpritesData(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")), isFav: true), rowState: .favorite)
+        PokemonRow(pokemonFullDetails:
+                    PokemonFullDetails(nameAndUrl: NameAndUrlData(name: "guy", url: "twig"), details: PokemonData(id: 1, moves: [PokemonMovesData(move: NameAndUrlData(name: "guy", url: "twig"))], abilities: [PokemonAbilitiesData(ability: NameAndUrlData(name: "guy", url: "twig"))], stats: [PokemonStatsData(stat: NameAndUrlData(name: "guy", url: "twig"))], sprites: SpritesData(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")), isFav: true))
     }
 }

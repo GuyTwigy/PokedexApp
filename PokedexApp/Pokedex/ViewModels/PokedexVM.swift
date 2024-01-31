@@ -15,7 +15,7 @@ class PokedexVM: ObservableObject {
     private var nameAndDetails: [PokemonFullDetails] = []
     private var cancellables = Set<AnyCancellable>()
     
-    @Published var pokemonNameAndDetails: [PokemonFullDetails] = []
+    @Published var PokemonFullDetailsList: [PokemonFullDetails] = []
     @Published var isLoading: Bool = false
     
     init() {
@@ -55,7 +55,7 @@ class PokedexVM: ObservableObject {
                     return
                 }
                 
-                self.pokemonNameAndDetails = self.nameAndDetails
+                self.PokemonFullDetailsList = self.nameAndDetails
             }
         }
     }
@@ -71,6 +71,18 @@ class PokedexVM: ObservableObject {
         } catch {
             print(ErrorsHandlers.requestError(.other(error)))
             return nil
+        }
+    }
+    
+    func updateFavoriteStatus(for pokemon: PokemonFullDetails) {
+        if let index = PokemonFullDetailsList.firstIndex(where: { $0.details.id == pokemon.details.id }) {
+            DispatchQueue.main.async { [weak self] in
+                guard let self else {
+                    return
+                }
+                
+                self.PokemonFullDetailsList[index].isFav = pokemon.isFav
+            }
         }
     }
 }

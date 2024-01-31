@@ -18,7 +18,7 @@ struct PokedexView: View {
                 Text("Pokedex")
                     .font(.system(size: 50))
                     .bold()
-                    .padding(.bottom, -17.0)
+                    .padding(.bottom, -20.0)
                 
                 Spacer()
                 
@@ -31,8 +31,8 @@ struct PokedexView: View {
             Spacer()
 
             List {
-                ForEach(pokedexVM.pokemonNameAndDetails, id: \.details.id) { pokemon in
-                    PokemonRow(pokemonNameAndDetails: pokemon, rowState: .pokedex)
+                ForEach(pokedexVM.PokemonFullDetailsList, id: \.details.id) { pokemon in
+                    PokemonRow(pokemonFullDetails: pokemon)
                 }
             }
             .padding(.top, 30)

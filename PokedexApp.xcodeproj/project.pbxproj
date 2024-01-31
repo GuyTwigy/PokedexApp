@@ -25,6 +25,7 @@
 		9D9B1B882B6A451700B69919 /* PokemonFullDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9B1B872B6A451700B69919 /* PokemonFullDetails.swift */; };
 		9D9B1B8B2B6A543A00B69919 /* PokemonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9B1B8A2B6A543A00B69919 /* PokemonDetailsView.swift */; };
 		9D9B1B8F2B6A547200B69919 /* PokemonDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9B1B8E2B6A547200B69919 /* PokemonDetailsVM.swift */; };
+		9D9B1B932B6A7DB900B69919 /* PokemonFavRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9B1B922B6A7DB900B69919 /* PokemonFavRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		9D9B1B872B6A451700B69919 /* PokemonFullDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonFullDetails.swift; sourceTree = "<group>"; };
 		9D9B1B8A2B6A543A00B69919 /* PokemonDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsView.swift; sourceTree = "<group>"; };
 		9D9B1B8E2B6A547200B69919 /* PokemonDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailsVM.swift; sourceTree = "<group>"; };
+		9D9B1B922B6A7DB900B69919 /* PokemonFavRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonFavRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				9D9B1B822B69076500B69919 /* FavoriteListView.swift */,
 				9D9B1B7B2B68504A00B69919 /* PokemonRow.swift */,
 				9D9B1B8A2B6A543A00B69919 /* PokemonDetailsView.swift */,
+				9D9B1B922B6A7DB900B69919 /* PokemonFavRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				9D9B1B702B6845F800B69919 /* NetWorkBuilder.swift in Sources */,
 				9D9B1B6A2B68430400B69919 /* NetworkManager.swift in Sources */,
 				9D9B1B562B68292F00B69919 /* PokedexView.swift in Sources */,
+				9D9B1B932B6A7DB900B69919 /* PokemonFavRow.swift in Sources */,
 				9D9B1B882B6A451700B69919 /* PokemonFullDetails.swift in Sources */,
 				9D9B1B542B68292F00B69919 /* PokedexApp.swift in Sources */,
 				9D9B1B632B682E5700B69919 /* PokedexData.swift in Sources */,

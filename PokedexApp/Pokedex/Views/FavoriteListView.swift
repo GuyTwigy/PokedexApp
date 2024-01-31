@@ -10,19 +10,17 @@ import SwiftUI
 struct FavoriteListView: View {
     
     @EnvironmentObject var favoriteVM: FavoriteVM
-    @EnvironmentObject var pokedexVM: PokedexVM
 
     var body: some View {
+        Text("My Favorite Pokemons List")
+            .font(.system(size: 35))
+            .multilineTextAlignment(.center)
         List {
             ForEach(favoriteVM.favorites, id: \.details.id) { pokemon in
-                PokemonRow(pokemonNameAndDetails: pokemon, rowState: .favorite)
+                PokemonFavRow(pokemonFullDetails: pokemon)
+                    .padding()
             }
         }
     }
 }
 
-//struct FavoriteListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FavoriteListView(favoriteVM: FavoriteVM(pokedexVM: PokedexVM()))
-//    }
-//}
