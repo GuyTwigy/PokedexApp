@@ -71,16 +71,7 @@ struct PokemonRow: View {
             
             Button(action: {
                 isLikeTapped.toggle()
-                switch rowState {
-                case .pokedex:
-                    if isLikeTapped {
-                        favoriteVM.addFavorite(pokemonNameAndDetails)
-                    } else {
-                        favoriteVM.removeFavorite(pokemonNameAndDetails)
-                    }
-                case .favorite:
-                    favoriteVM.updateIsFav(for: pokemonNameAndDetails.details.id ?? 1, isFav: false)
-                }
+                favoriteVM.toggleFavorite(pokemon: pokemonNameAndDetails, isFavorite: isLikeTapped)
             }) {
                 if isLikeTapped {
                     Image(systemName: "heart.fill")

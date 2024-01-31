@@ -9,8 +9,8 @@ import Foundation
 
 class FavoriteVM: ObservableObject {
     
-    @Published var favorites: [PokemonFullDetails] = []
     var pokedexVM: PokedexVM
+    @Published var favorites: [PokemonFullDetails] = []
     
     init(pokedexVM: PokedexVM) {
         self.pokedexVM = pokedexVM
@@ -28,12 +28,11 @@ class FavoriteVM: ObservableObject {
         favorites.removeAll(where: { $0.details.id == pokemon.details.id })
     }
     
-    func updateIsFav(for id: Int, isFav: Bool) {
-        if let index = favorites.firstIndex(where: { $0.details.id == id }) {
-            favorites.remove(at: index)
-        }
-        if let pokedexIndex = pokedexVM.pokemonNameAndDetails.firstIndex(where: { $0.details.id == id }) {
-            pokedexVM.pokemonNameAndDetails[pokedexIndex].isFav = isFav
+    func toggleFavorite(pokemon: PokemonFullDetails, isFavorite: Bool) {
+        if isFavorite {
+            addFavorite(pokemon)
+        } else {
+            removeFavorite(pokemon)
         }
     }
 }
