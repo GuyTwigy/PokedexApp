@@ -9,13 +9,13 @@ import SwiftUI
 
 struct PokemonRow: View {
     
-    var pokemonNameAndDetails: (nameAndUrl: NameAndUrlData, details: PokemonData, isFav: Bool)
+    var pokemonNameAndDetails: PokemonFullDetails
     
     @ObservedObject private var fetchImageUrl: FetchImageUrl
     @State private var isLikeTapped: Bool
     @EnvironmentObject var favoriteVM: FavoriteVM
     
-    init(pokemonNameAndDetails: (nameAndUrl: NameAndUrlData, details: PokemonData, isFav: Bool)) {
+    init(pokemonNameAndDetails: PokemonFullDetails) {
         self.pokemonNameAndDetails = pokemonNameAndDetails
         self.isLikeTapped = pokemonNameAndDetails.isFav
         fetchImageUrl = FetchImageUrl(imageUrl: pokemonNameAndDetails.details.sprites?.frontDefault ?? "")
@@ -96,10 +96,15 @@ struct PokemonRow: View {
         }
         .listRowSeparator(.hidden)
     }
+    
+    mutating func changeIsFavValue() {
+        pokemonNameAndDetails.isFav = true
+    }
 }
 
 struct PokemonRow_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonRow(pokemonNameAndDetails: (nameAndUrl: NameAndUrlData(name: "guy", url: "twig"), details: PokemonData(id: 1, moves: [PokemonMovesData(move: NameAndUrlData(name: "guy", url: "twig"))], stats: [PokemonStatsData(stat: NameAndUrlData(name: "guy", url: "twig"))], sprites: SpritesData(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")), isFav: true))
+        PokemonRow(pokemonNameAndDetails:
+                    PokemonFullDetails(nameAndUrl: NameAndUrlData(name: "guy", url: "twig"), details: PokemonData(id: 1, moves: [PokemonMovesData(move: NameAndUrlData(name: "guy", url: "twig"))], stats: [PokemonStatsData(stat: NameAndUrlData(name: "guy", url: "twig"))], sprites: SpritesData(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")), isFav: true))
     }
 }

@@ -12,10 +12,10 @@ class PokedexVM: ObservableObject {
     
     private var pokemonNameList: [NameAndUrlData] = []
     private var pokemonDetailsList: [PokemonData] = []
-    private var nameAndDetails: [(nameAndUrl: NameAndUrlData, details: PokemonData, isFav: Bool)] = []
+    private var nameAndDetails: [PokemonFullDetails] = []
     private var cancellables = Set<AnyCancellable>()
     
-    @Published var pokemonNameAndDetails: [(nameAndUrl: NameAndUrlData, details: PokemonData, isFav: Bool)] = []
+    @Published var pokemonNameAndDetails: [PokemonFullDetails] = []
     @Published var isLoading: Bool = false
     
     init() {
@@ -47,7 +47,7 @@ class PokedexVM: ObservableObject {
         Task {
             for pokemonName in pokemonNameList {
                 if let pokemonData = await fetchSinglePokemonsDetails(url: pokemonName.url ?? "") {
-                    nameAndDetails.append((pokemonName, pokemonData, false))
+                    nameAndDetails.append(PokemonFullDetails(nameAndUrl: pokemonName, details: pokemonData, isFav: false))
                 }
             }
             DispatchQueue.main.async { [weak self] in

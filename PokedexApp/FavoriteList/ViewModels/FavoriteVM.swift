@@ -9,15 +9,15 @@ import Foundation
 
 class FavoriteVM: ObservableObject {
     
-    @Published var favorites: [(nameAndUrl: NameAndUrlData, details: PokemonData, isFav: Bool)] = []
+    @Published var favorites: [PokemonFullDetails] = []
     
-    func addFavorite(_ pokemon: (nameAndUrl: NameAndUrlData, details: PokemonData, isFav: Bool)) {
+    func addFavorite(_ pokemon: PokemonFullDetails) {
         if !favorites.contains(where: { $0.details.id == pokemon.details.id }) {
             favorites.append(pokemon)
         }
     }
     
-    func removeFavorite(_ pokemon:(nameAndUrl: NameAndUrlData, details: PokemonData, isFav: Bool)) {
+    func removeFavorite(_ pokemon: PokemonFullDetails) {
         favorites.removeAll(where: { $0.details.id == pokemon.details.id })
     }
 }

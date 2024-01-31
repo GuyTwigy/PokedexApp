@@ -24,10 +24,18 @@ struct PokemonData: Codable, Identifiable {
 
 struct PokemonMovesData: Codable {
     let move: NameAndUrlData?
+    
+    init(move: NameAndUrlData?) {
+        self.move = move
+    }
 }
 
 struct PokemonStatsData: Codable {
     let stat: NameAndUrlData?
+    
+    init(stat: NameAndUrlData?) {
+        self.stat = stat
+    }
 }
 
 struct SpritesData: Codable {
@@ -35,5 +43,9 @@ struct SpritesData: Codable {
     
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
+    }
+    
+    init(frontDefault: String?) {
+        self.frontDefault = frontDefault
     }
 }
