@@ -19,38 +19,40 @@ struct PokemonFavRow: View {
     }
     
     var body: some View {
-        HStack {
-            Text(pokemonFullDetails.nameAndUrl.name ?? "")
-                .font(.system(size: 30))
-                .bold()
-                .padding(.leading, 30.0)
-            
-            Spacer()
-            
-            if fetchImageUrl.isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .padding()
-            } else {
-                AsyncImage(url: URL(string: pokemonFullDetails.details.sprites?.frontDefault ?? "")) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .padding()
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 100)
-                            .clipped()
-                            .cornerRadius(12)
-                            .padding(.trailing, 20.0)
-                            .shadow(radius: 5, x: 3, y: 5)
-                    case .failure:
-                        Text("Unable to load image.")
-                    @unknown default:
-                        EmptyView()
+        NavigationLink(destination: PokemonDetailsView(pokemon: pokemonFullDetails)) {
+            HStack {
+                Text(pokemonFullDetails.nameAndUrl.name ?? "")
+                    .font(.system(size: 30))
+                    .bold()
+                    .padding(.leading, 30.0)
+                
+                Spacer()
+                
+                if fetchImageUrl.isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding()
+                } else {
+                    AsyncImage(url: URL(string: pokemonFullDetails.details.sprites?.frontDefault ?? "")) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .padding()
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100, height: 100)
+                                .clipped()
+                                .cornerRadius(12)
+                                .padding(.trailing, 20.0)
+                                .shadow(radius: 5, x: 3, y: 5)
+                        case .failure:
+                            Text("Unable to load image.")
+                        @unknown default:
+                            EmptyView()
+                        }
                     }
                 }
             }

@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct PokemonDetailsView: View {
+    
+    var pokemon: PokemonFullDetails
+    @EnvironmentObject var favoriteVM: FavoriteVM
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(pokemon.nameAndUrl.name ?? "")
     }
 }
 
 struct PokemonDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailsView()
+        PokemonDetailsView(pokemon: PokemonFullDetails(nameAndUrl: NameAndUrlData(name: "guy", url: "twig"), details: PokemonData(id: 1, moves: [PokemonMovesData(move: NameAndUrlData(name: "guy", url: "twig"))], abilities: [PokemonAbilitiesData(ability: NameAndUrlData(name: "guy", url: "twig"))], stats: [PokemonStatsData(stat: NameAndUrlData(name: "guy", url: "twig"))], sprites: SpritesData(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")), isFav: true))
     }
 }

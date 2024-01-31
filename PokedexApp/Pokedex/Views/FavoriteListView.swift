@@ -18,7 +18,6 @@ struct FavoriteListView: View {
         List {
             ForEach(favoriteVM.favorites, id: \.details.id) { pokemon in
                 PokemonFavRow(pokemonFullDetails: pokemon)
-                    .padding()
             }
         }
     }
