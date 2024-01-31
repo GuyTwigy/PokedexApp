@@ -13,9 +13,7 @@ class FavoriteVM: ObservableObject {
     
     func addFavorite(_ pokemon: PokemonFullDetails) {
         if !favorites.contains(where: { $0.details.id == pokemon.details.id }) {
-            var pok = pokemon
-            pok.isFav = true
-            favorites.append(pok)
+            favorites.append(pokemon)
         }
     }
     
