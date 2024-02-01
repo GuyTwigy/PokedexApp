@@ -14,39 +14,40 @@ struct PokedexView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                HStack {
-                    Spacer()
-                    
-                    Text("Pokedex")
-                        .font(.system(size: 45))
-                        .bold()
-                        .padding()
-                    
-                    Spacer()
-                }
-                .frame(height: 100)
-                .padding(.top, 20)
-                
-                Spacer()
-                
-                List {
-                    ForEach(pokedexVM.PokemonFullDetailsList, id: \.details.id) { pokemon in
-                        PokemonRow(pokemonFullDetails: pokemon)
-                            .onAppear {
-                                if pokemon.details.id == pokedexVM.PokemonFullDetailsList.last?.details.id {
-                                    pokedexVM.loadMoreDataIfNeeded()
-                                }
-                            }
+            ZStack {
+                VStack {
+                    HStack {
+                        Spacer()
+                        
+                        Text("Pokedex")
+                            .font(.system(size: 45))
+                            .bold()
+                            .padding()
+                        
+                        Spacer()
                     }
+                    .frame(height: 100)
+                    .padding(.top, 20)
+                    
+                    Spacer()
+                    
+                    List {
+                        ForEach(pokedexVM.PokemonFullDetailsList, id: \.details.id) { pokemon in
+                            PokemonRow(pokemonFullDetails: pokemon)
+                                .onAppear {
+                                    if pokemon.details.id == pokedexVM.PokemonFullDetailsList.last?.details.id && !pokedexVM.PokemonFullDetailsList.isEmpty {
+                                        pokedexVM.loadMoreDataIfNeeded()
+                                    }
+                                }
+                        }
+                    }
+                    .padding(.top, -15)
                 }
-                .padding(.top, -15)
-                
                 if pokedexVM.isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(2.5)
                         .padding()
-                        .frame(width: 50, height: 50)
                 }
             }
         }
