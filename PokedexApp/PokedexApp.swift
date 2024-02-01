@@ -12,28 +12,38 @@ struct PokedexApp: App {
     
     @StateObject var favoritesVM = FavoritesVM()
     
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        
+        // Apply the appearance to all tab bars
+        UITabBar.appearance().standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+    }
+    
     var body: some Scene {
         WindowGroup {
             TabView {
+                PokedexView()
+                    .environmentObject(favoritesVM)
+                    .tabItem {
+                        Image(systemName: "hare.fill")
+                        Text("Pokedex")
+                    }
                 
-                NavigationView {
-                    PokedexView()
-                        .environmentObject(favoritesVM)
-                        .tabItem {
-                            Image(systemName: "note")
-                            Text("Pokedex")
-                        }
-                }
                 
-                NavigationView {
-                    FavoritesView()
-                        .environmentObject(favoritesVM)
-                        .tabItem {
-                            Image(systemName: "heart")
-                            Text("Favorites")
-                        }
-                }
+                FavoritesView()
+                    .environmentObject(favoritesVM)
+                    .tabItem {
+                        Image(systemName: "heart")
+                        Text("Favorites")
+                    }
+                
             }
+            .accentColor(.orange)
         }
     }
 }
