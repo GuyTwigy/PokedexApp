@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailsDescriptionRow: View {
     
     var textDescription: String
-
+    
     init(textDescription: String) {
         self.textDescription = textDescription
     }

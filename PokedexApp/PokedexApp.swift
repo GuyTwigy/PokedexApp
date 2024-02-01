@@ -17,7 +17,6 @@ struct PokedexApp: App {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
         
-        // Apply the appearance to all tab bars
         UITabBar.appearance().standardAppearance = appearance
         if #available(iOS 15.0, *) {
             UITabBar.appearance().scrollEdgeAppearance = appearance
