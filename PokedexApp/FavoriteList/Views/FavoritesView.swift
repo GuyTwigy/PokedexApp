@@ -18,9 +18,19 @@ struct FavoritesView: View {
                 .multilineTextAlignment(.center)
                 .padding()
             
-            List {
-                ForEach(favoritesVM.favoritesArr, id: \.details.id) { pokemon in
-                    PokemonRow(pokemonFullDetails: pokemon)
+            if favoritesVM.favoritesArr.isEmpty {
+                Spacer()
+                Text("The favorite list is empty.")
+                Text("Go catch them all!")
+                    .font(.system(size: 20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Spacer()
+            } else {
+                List {
+                    ForEach(favoritesVM.favoritesArr, id: \.details.id) { pokemon in
+                        PokemonRow(pokemonFullDetails: pokemon)
+                    }
                 }
             }
         }

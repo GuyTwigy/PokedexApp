@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PokedexView: View {
     
-    @ObservedObject private var pokedexVM = PokedexVM()
+    @StateObject private var pokedexVM = PokedexVM()
     @EnvironmentObject var favoritesVM: FavoritesVM
     
     var body: some View {
@@ -33,7 +33,7 @@ struct PokedexView: View {
                 ForEach(pokedexVM.PokemonFullDetailsList, id: \.details.id) { pokemon in
                     PokemonRow(pokemonFullDetails: pokemon)
                         .onAppear {
-                            if pokedexVM.counterForFetchMore < 70 && !pokedexVM.isLoading || pokemon.details.id == pokedexVM.PokemonFullDetailsList.last?.details.id {
+                            if pokemon.details.id == pokedexVM.PokemonFullDetailsList.last?.details.id {
                                 pokedexVM.loadMoreDataIfNeeded()
                             }
                         }

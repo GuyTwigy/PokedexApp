@@ -25,6 +25,10 @@ class PokedexVM: ObservableObject {
     }
     
     func fetchPokemonsName(urlString: String) {
+        guard !isLoading else {
+            return
+        }
+        
         isLoading = true
         if let url = URL(string: urlString) {
             let urlRequest = URLRequest(url: url)
