@@ -10,7 +10,7 @@ import SwiftUI
 struct PokedexView: View {
     
     @ObservedObject private var pokedexVM = PokedexVM()
-    @EnvironmentObject var favoriteVM: FavoriteVM
+    @EnvironmentObject var favoritesVM: FavoritesVM
     
     var body: some View {
         VStack {
@@ -20,36 +20,9 @@ struct PokedexView: View {
                 Text("Pokedex")
                     .font(.system(size: 45))
                     .bold()
-                    .padding(.bottom, -30.0)
+                    .padding()
                 
                 Spacer()
-                
-                NavigationLink(destination: FavoriteListView()
-                    .environmentObject(favoriteVM)) {
-                        VStack {
-                            Spacer()
-                            
-                            Text("Tap To Check Yours Favorites Pokemons")
-                                .foregroundColor(.red)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(nil)
-                                .minimumScaleFactor(0.5)
-                            
-                            Image(systemName: "heart.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 10, height: 10)
-                                .foregroundColor(.red)
-                        }
-                        .padding(.top, -100.0)
-                        .background(.white)
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.red, lineWidth: 1)
-                        )
-                    }
-                    .padding()
             }
             .frame(height: 100)
             .padding(.top, 20)
@@ -66,7 +39,7 @@ struct PokedexView: View {
                         }
                 }
             }
-            .padding(.top, 30)
+            .padding(.top, -15)
             
             if pokedexVM.isLoading {
                 ProgressView()
@@ -81,5 +54,6 @@ struct PokedexView: View {
 struct PokedexView_Previews: PreviewProvider {
     static var previews: some View {
         PokedexView()
+            .environmentObject(FavoritesVM())
     }
 }

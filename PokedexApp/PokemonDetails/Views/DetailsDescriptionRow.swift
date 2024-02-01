@@ -10,7 +10,6 @@ import SwiftUI
 struct DetailsDescriptionRow: View {
     
     var textDescription: String
-    @EnvironmentObject var favoriteVM: FavoriteVM
 
     init(textDescription: String) {
         self.textDescription = textDescription

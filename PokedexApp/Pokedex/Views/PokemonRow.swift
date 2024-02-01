@@ -11,7 +11,7 @@ struct PokemonRow: View {
     
     var pokemonFullDetails: PokemonFullDetails
     @ObservedObject private var fetchImageUrl: FetchImageUrl
-    @EnvironmentObject var favoriteVM: FavoriteVM
+    @EnvironmentObject var favoritesVM: FavoritesVM
     
     init(pokemonFullDetails: PokemonFullDetails) {
         self.pokemonFullDetails = pokemonFullDetails
@@ -19,8 +19,8 @@ struct PokemonRow: View {
     }
     
     var body: some View {
-        NavigationLink(destination: PokemonDetailsView(pokemonFullDetails: pokemonFullDetails, isLikeTapped: false)
-            .environmentObject(FavoriteVM())) {
+        NavigationLink(destination: PokemonDetailsView(pokemonFullDetails: pokemonFullDetails)
+            .environmentObject(favoritesVM)) {
             HStack {
                 if fetchImageUrl.isLoading {
                     ProgressView()
