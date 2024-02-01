@@ -84,6 +84,9 @@ struct PokemonDetailsView: View {
                 .padding()
             }
         }
+        .onAppear {
+            isLikeTapped = favoritesVM.favoritesArr.contains(where: { $0.details.id == pokemonFullDetails.details.id })
+        }
         .onDisappear {
             favoritesVM.toggleFavorite(pokemon: pokemonFullDetails, isFavorite: isLikeTapped)
         }
