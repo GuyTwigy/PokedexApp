@@ -64,6 +64,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D120B232B6BEF8C00DC708C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9D9B1B712B6847D400B69919 /* Pokedex */,
+				9D9B1B9F2B6AF99C00B69919 /* FavoriteList */,
+				9D9B1BA22B6AFA1A00B69919 /* PokemonDetails */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9D9B1B472B68292F00B69919 = {
 			isa = PBXGroup;
 			children = (
@@ -85,15 +95,12 @@
 			children = (
 				9D9B1B532B68292F00B69919 /* PokedexApp.swift */,
 				9D9B1B572B68293000B69919 /* Assets.xcassets */,
-				9D9B1B712B6847D400B69919 /* Pokedex */,
-				9D9B1B9F2B6AF99C00B69919 /* FavoriteList */,
-				9D9B1BA22B6AFA1A00B69919 /* PokemonDetails */,
-				9D9B1B942B6A953E00B69919 /* PokedexManager */,
 				9D9B1B6E2B6845E300B69919 /* NetworkBuilder */,
 				9D9B1B682B6842E800B69919 /* NetworkManger */,
 				9D9B1B612B682E2B00B69919 /* Models */,
 				9D9B1B6B2B68434500B69919 /* ErrorHAndlers */,
-				9D9B1B782B684F7000B69919 /* UtilitiesViews */,
+				9D9B1B942B6A953E00B69919 /* PokedexManager */,
+				9D120B232B6BEF8C00DC708C /* Views */,
 				9D9B1B592B68293000B69919 /* Preview Content */,
 			);
 			path = PokedexApp;
@@ -212,6 +219,7 @@
 		9D9B1BA22B6AFA1A00B69919 /* PokemonDetails */ = {
 			isa = PBXGroup;
 			children = (
+				9D9B1B782B684F7000B69919 /* UtilitiesViews */,
 				9D9B1BA32B6AFA3C00B69919 /* Views */,
 				9D9B1BA42B6AFA4E00B69919 /* ViewModels */,
 			);
