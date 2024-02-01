@@ -26,10 +26,10 @@ class FavoritesVM: ObservableObject {
     }
     
     func toggleFavorite(pokemon: PokemonFullDetails, isFavorite: Bool) {
-            if isFavorite {
-                addFavorite(pokemon)
-            } else {
-                removeFavorite(pokemon)
-            }
+        if isFavorite {
+            addFavorite(pokemon)
+        } else {
+            removeFavorite(pokemon)
+        }
     }
 }
